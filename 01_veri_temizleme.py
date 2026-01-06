@@ -1,5 +1,15 @@
 import pandas as pd
 import ast 
+import zipfile
+import os
+
+# --- OTOMATİK ZIP ÇIKARMA ---
+# Eğer csv dosyaları klasörde yoksa, archive.zip içinden çıkar
+if not os.path.exists("tmdb_5000_movies.csv") or not os.path.exists("tmdb_5000_credits.csv"):
+    print("archive.zip dosyası dışarı aktarılıyor...")
+    with zipfile.ZipFile("archive.zip", 'r') as zip_ref:
+        zip_ref.extractall(".")
+    print("Dosyalar başarıyla çıkarıldı!")
 
 # 1. Veriyi Yükle
 movies = pd.read_csv("tmdb_5000_movies.csv")
